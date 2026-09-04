@@ -51,13 +51,14 @@ def ip_verify(ip):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 3:
         print("Erro: Argumentos insuficientes.")
-        print(f"Uso correto: python {sys.argv[0]} <IP_ADDRESS> <PORT>")
+        print(f"Uso correto: python {sys.argv[0]} <IP_ADDRESS> <PORT_INI> [PORT_FIN]")
         sys.exit(1)
 
     ip_address = sys.argv[1]
     port_ini = sys.argv[2]
-    port_fin = sys.argv[3]
+
+    port_fin = sys.argv[3] if len(sys.argv) > 3 else port_ini
 
     client(ip_address, port_ini, port_fin)
