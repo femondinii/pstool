@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: pstool
+Version: 1.0.0
+Summary: Pentest Socket Toolkit
+Requires-Dist: paramiko
+Requires-Dist: rich

@@ -1,0 +1,17 @@
+[project]
+name = "pstool"
+version = "1.0.0"
+description = "Pentest Socket Toolkit"
+dependencies = [
+    "paramiko",
+    "rich"
+]
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.setuptools.packages.find]
+include = ["scanner*", "models*", "utils*"]
+
+[project.scripts]
+pstool = "main:main"

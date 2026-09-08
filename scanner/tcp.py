@@ -1,6 +1,7 @@
 import socket
 
-from scanner.scanner import BaseScanner
+from models.scan_result import ScanResult
+from scanner.base import BaseScanner
 
 
 class TCPScanner(BaseScanner):
@@ -19,12 +20,12 @@ class TCPScanner(BaseScanner):
 
         try:
             client.connect((self.ip, port))
-            print(f"[+] tcp/{port} OPEN")
-        except socket.timeout:
-            print(f"[!] tcp/{port} TIMEOUT")
-        except ConnectionRefusedError:
-            print(f"[-] tcp/{port} CLOSED")
-        except OSError as error:
-            print(f"[!] tcp/{port} ERROR: {error}")
+            service = socket.getservbyport(port)
+
+            return ScanResult(port, "tcp", "open", service)
+
+        except (socket.timeout, ConnectionRefusedError, OSError):
+            return None
+
         finally:
             client.close()
