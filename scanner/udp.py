@@ -16,7 +16,12 @@ class UDPScanner(BaseScanner):
 
         try:
             client.sendto(b"PING\n", (self.ip, port))
-            service = socket.getservbyport(port, 'udp')
+
+            try:
+                service = socket.getservbyport(port)
+            except OSError:
+                service = ""
+
             sleep(1)
             client.recvfrom(1024)
 

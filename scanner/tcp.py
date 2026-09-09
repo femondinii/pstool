@@ -20,7 +20,11 @@ class TCPScanner(BaseScanner):
 
         try:
             client.connect((self.ip, port))
-            service = socket.getservbyport(port)
+
+            try:
+                service = socket.getservbyport(port)
+            except OSError:
+                service = ""
 
             return ScanResult(port, "tcp", "open", service)
 
